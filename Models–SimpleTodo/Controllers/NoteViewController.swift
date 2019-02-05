@@ -34,14 +34,12 @@ class NoteViewController: UIViewController {
     @IBAction func addNote(_ sender: Any) {
         if inputsNotEmpty() {
          // –– Your code here ––
-            let newTitle = noteTitle.text
-            let newDate = noteDate.text
-            let newDescription = noteDescription.text
+            let newTitle = noteTitle.text!
+            let newDate = noteDate.text!
+            let newDescription = noteDescription.text!
             
-            let newNote = Note(todoTitle: newTitle!, todoDate: newDate!, todoDescription: newDescription!)
+            let newNote = Note(todoTitle: newTitle, todoDate: newDate, todoDescription: newDescription)
             Note.allNotes.append(newNote)
-
-            
             
             resetFields()
             

@@ -12,6 +12,8 @@ class AllNotesViewController: UIViewController {
     
     @IBOutlet weak var notesTableView: UITableView!
     
+    let defaultNote = [Note(todoTitle: "Welcome to SimpleTodo", todoDate: "This is a due date", todoDescription: "Start writing your own to-do notes and see them being posted here")]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,15 +49,25 @@ extension AllNotesViewController: UITableViewDataSource, UITableViewDelegate {
     // TODO: CONFIGURE tableView functionality
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Code here
-        return Note.allNotes.count
+        
+        if Note.allNotes.count == 0 {
+            return defaultNote.count
+        } else {
+            return Note.allNotes.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Code
         let cell = notesTableView.dequeueReusableCell(withIdentifier: "NoteCell") as! NoteCell
-        let note = Note.allNotes[indexPath.row]
-
-        cell.note = note
+        
+        if Note.allNotes.count == 0 {
+            let note = defaultNote[indexPath.row]
+            cell.note = note
+        } else {
+            let note = Note.allNotes[indexPath.row]
+            cell.note = note
+        }
         
         // UNPROFESSIONAL
 //        cell.todoTitle.text = note.todoTitle
